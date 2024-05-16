@@ -30,6 +30,7 @@ function iniciarJogo() {
   }
   peca = new Peca(); //instancia um novo tetramino.  
   tempo = new Date().getTime(); //Tempo para controla a velocidade de queda dos tetraminós.
+    document.getElementById("audio").play();
 }
 
 function carregarTela() {
