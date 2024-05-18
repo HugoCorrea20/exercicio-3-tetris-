@@ -152,7 +152,6 @@ function removerLinhas(linhas) {
   switch (linhas.length) {
     case 2:
       pontosBônus = 2; // Bônus de 2 pontos por remover 2 linhas
-      document.getElementById("especial").play(); // Tocar áudio especial para 4 linhas
       break;
     case 3:
       pontosBônus = 4; // Bônus de 4 pontos por remover 3 linhas
