@@ -70,8 +70,11 @@ function desenharPeca() {
 function movimentarPeca() {
   // verifica se o tetraminó pode descer.
   if (podeMover("descer")) {
-    peca.descer(); //desce o tetraminó
-  } else { //Senão
+    peca.descer(); // desce o tetraminó
+  } else { // Senão
+    // Tocar o som de fixação da peça
+    document.getElementById("fixa").play();
+    
     // preenche a posição de parada do tetraminó na tela.
     for (let i = 0; i < tam; i++) {
       if (peca.partes[i][0] >= 0 && peca.partes[i][1] >= 0) {
@@ -83,7 +86,7 @@ function movimentarPeca() {
     // verifica se tem linhas completas.
     verificarLinhasCompletas();
 
-    //Reseta o controle da rotação das peças
+    // Reseta o controle da rotação das peças
     rotBastao = 1;
     rotZ = 1;
     rotS = 1;
@@ -92,6 +95,7 @@ function movimentarPeca() {
     rotT = 1;
   }
 }
+
 
 //Metodo que testa se pode descer, ir para a esquerda ou direita
 function podeMover(novaPos) {
@@ -140,6 +144,30 @@ function verificarLinhasCompletas() {
 }
 
 function removerLinhas(linhas) {
+  if (linhas.length === 0) return; // Se não há linhas completas, sai da função
+
+  let pontosBase = 1;
+  let pontosBônus = 0;
+
+  switch (linhas.length) {
+    case 2:
+      pontosBônus = 2; // Bônus de 2 pontos por remover 2 linhas
+      document.getElementById("especial").play(); // Tocar áudio especial para 4 linhas
+      break;
+    case 3:
+      pontosBônus = 4; // Bônus de 4 pontos por remover 3 linhas
+      break;
+    case 4:
+      pontosBônus = 8; // Bônus de 8 pontos por remover 4 linhas
+      document.getElementById("especial").play(); // Tocar áudio especial para 4 linhas
+      break;
+    default:
+      pontosBônus = 0;
+  }
+
+  pontos += (pontosBase * linhas.length) + pontosBônus; // Calcula a pontuação total
+  lag = Math.max(100, lag - 25 * linhas.length); // Aumenta a velocidade das peças, mas nunca abaixo de 100 ms
+
   for (let i = 0; i < linhas.length; i++) {
     // Preenche as linhas que serão removidas com a cor branca.
     for (let c = 0; c < tela[linhas[i]].length; c++) {
@@ -151,9 +179,9 @@ function removerLinhas(linhas) {
         tela[l + 1][c] = tela[l][c];
       }
     }
-    pontos++; //Para cada linha removida, aumenta 1 ponto do jogador.
-    lag -= 25; //Aumenta a velocidade das peças
   }
+
+  document.getElementById("pontos").play();
   atualizarPontuacao(pontos); //Atualiza na página os pontos do jogador.
 }
 
@@ -488,6 +516,8 @@ function terminou() {
     let texto = "Pressione espaço para reiniciar!";
     ctx.fillText(texto, canvas.width / 2, canvas.height / 2 + 30);
     ctx.strokeText(texto, canvas.width / 2, canvas.height / 2 + 30);
+    document.getElementById("gameover").play();
+    
   }
   return fim;
 }
