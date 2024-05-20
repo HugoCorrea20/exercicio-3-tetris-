@@ -13,7 +13,8 @@ let lag = 1000; // intervalo de tempo de movimentação do tetraminó.
 let tam; //Tamanho das peças em blocos
 //Controle das rotações das peças
 let rotBastao = 1;     //1 deitado 2 em pé
-let rotZ = 1;          //1 deitado 2 em pé
+let Rotminibastão =1;
+let  rotZ = 1;          //1 deitado 2 em pé
 let rotS = 1;          //1 deitado 2 em pé
 let rotL = 1;          //4 posições
 let rotLInvertido = 1; //4 posições
@@ -204,7 +205,7 @@ function grids() {
 }
 
 function Peca() {
-  //Cria a matriz com as peças
+  // Cria a matriz com as peças
   this.pecas = [
     [[-1, 4], [-1, 5], [0, 5], [0, 6]],   //  peça 0 = Z
     [[-1, 4], [-1, 5], [-1, 6], [0, 6]],  //  peça 1 = L invertido
@@ -212,16 +213,19 @@ function Peca() {
     [[-1, 5], [-1, 6], [0, 5], [0, 6]],   //  peça 3 = quadrado
     [[-1, 4], [-1, 5], [0, 3], [0, 4]],   //  peça 4 = S
     [[-1, 4], [-1, 5], [-1, 6], [0, 4]],  //  peça 5 = L
-    [[-1, 4], [-1, 5], [-1, 6], [0, 5]]]; //  peça 6 =  T
+    [[-1, 4], [-1, 5], [-1, 6], [0, 5]],  //  peça 6 = T
+    [[0, 4], [0, 5], [0, 6]]];             //  peça 7 = bastão de 3 blocos
+  
 
-  //Vetor com as cores dos tetraminós
-  this.cores = ['purple', 'tomato', 'slateblue', 'mediumseagreen', 'orange', 'dodgerblue', 'MediumOrchid'];
-  //Seleciona uma cor aleatóriamente.
+  // Vetor com as cores dos tetraminós
+  this.cores = ['purple', 'tomato', 'slateblue', 'mediumseagreen', 'orange', 'dodgerblue', 'MediumOrchid', 'lightblue'];
+  // Seleciona uma cor aleatóriamente.
   this.cor = this.cores[Math.floor(Math.random() * this.cores.length)];
-  //Seleciona um tetraminó aleatóriamente quando uma instância da peça é criada.
+  // Seleciona um tetraminó aleatóriamente quando uma instância da peça é criada.
   this.partes = this.pecas[Math.floor(Math.random() * this.pecas.length)];
   tam = this.partes.length;
 }
+
 
 //Controla as funções das peças
 Peca.prototype = {
@@ -307,7 +311,23 @@ Peca.prototype = {
           rotZ = 1;
         }
       } //Fim do giro do Z
-
+      if (this.pecas[7] == this.partes) {
+        if (Rotminibastão == 1) {
+          // deixar bastao de 3 blocos em pé
+          this.partes[0][0] -= 1;
+          this.partes[0][1] += 1;
+          this.partes[2][0] += 1;
+          this.partes[2][1] -= 1;
+          Rotminibastão = 0;
+        } else {
+          // deixar bastao de 3 blocos deitado
+          this.partes[0][0] += 1;
+          this.partes[0][1] -= 1;
+          this.partes[2][0] -= 1;
+          this.partes[2][1] += 1;
+          Rotminibastão = 1;
+        }
+      }
       //Se a peça é o S
       else if (this.pecas[4] == this.partes) {
         if (rotS == 1) {
