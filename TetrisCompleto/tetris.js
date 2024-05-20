@@ -214,17 +214,19 @@ function Peca() {
     [[-1, 4], [-1, 5], [0, 3], [0, 4]],   //  peça 4 = S
     [[-1, 4], [-1, 5], [-1, 6], [0, 4]],  //  peça 5 = L
     [[-1, 4], [-1, 5], [-1, 6], [0, 5]],  //  peça 6 = T
-    [[0, 4], [0, 5], [0, 6]]];             //  peça 7 = bastão de 3 blocos
-  
+    [[0, 4], [0, 5], [0, 6]],             //  peça 7 = bastão de 3 blocos
+    [[0, 4], [0, 5], [0, 6], [1, 4], [1, 5], [1, 6]]  // peça 8 = retângulo de 6 blocos
+  ];
 
   // Vetor com as cores dos tetraminós
-  this.cores = ['purple', 'tomato', 'slateblue', 'mediumseagreen', 'orange', 'dodgerblue', 'MediumOrchid', 'lightblue'];
+  this.cores = ['purple', 'tomato', 'slateblue', 'mediumseagreen', 'orange', 'dodgerblue', 'MediumOrchid', 'lightblue', 'brown'];
   // Seleciona uma cor aleatóriamente.
   this.cor = this.cores[Math.floor(Math.random() * this.cores.length)];
   // Seleciona um tetraminó aleatóriamente quando uma instância da peça é criada.
   this.partes = this.pecas[Math.floor(Math.random() * this.pecas.length)];
   tam = this.partes.length;
 }
+
 
 
 //Controla as funções das peças
