@@ -19,6 +19,7 @@ let rotS = 1;          //1 deitado 2 em pé
 let rotL = 1;          //4 posições
 let rotLInvertido = 1; //4 posições
 let rotT = 1;          //4 posições
+let rotBastao6 = 1;    //1 deitado 2 em pé
 
 
 function iniciarJogo() {
@@ -94,6 +95,7 @@ function movimentarPeca() {
     rotLInvertido = 1;
     rotL = 1;
     rotT = 1;
+    Rotminibastão =1;
   }
 }
 
@@ -330,6 +332,7 @@ Peca.prototype = {
           Rotminibastão = 1;
         }
       }
+      
       //Se a peça é o S
       else if (this.pecas[4] == this.partes) {
         if (rotS == 1) {
