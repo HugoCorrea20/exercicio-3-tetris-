@@ -148,7 +148,7 @@ function verificarLinhasCompletas() {
 function removerLinhas(linhas) {
   if (linhas.length === 0) return; // Se não há linhas completas, sai da função
 
-  let pontosBase = 1;
+  let pontosBase = 0;
   let pontosBônus = 0;
 
   switch (linhas.length) {
@@ -490,9 +490,9 @@ function desenhar() {
   document.addEventListener('keydown', function (e) {
     if (e.key == "ArrowLeft") {
       peca.paraEsquerda();
-      if (document.getElementById("audio").paused) {
+     if (document.getElementById("audio").paused) {
         document.getElementById("audio").play();
-        }
+        } 
     } else if (e.key == "ArrowRight") {
       peca.paraDireita();
       if (document.getElementById("audio").paused) {
@@ -546,7 +546,12 @@ function terminou() {
     ctx.fillText(texto, canvas.width / 2, canvas.height / 2 + 30);
     ctx.strokeText(texto, canvas.width / 2, canvas.height / 2 + 30);
     document.getElementById("gameover").play();
-    
+     // Pausa o áudio
+     let audio = document.getElementById("audio");
+     if (!audio.paused) {
+       audio.pause();
+       audio.currentTime = 0; // Reseta o áudio para o início
+     }
   }
   return fim;
 }
