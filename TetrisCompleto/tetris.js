@@ -149,15 +149,22 @@ function verificarLinhasCompletas() {
 function removerLinhas(linhas) {
   if (linhas.length === 0) return; // Se não há linhas completas, sai da função
 
-  let pontosBase = 1;
+  let pontosBase = 0;
   let pontosBônus = 0;
 
   switch (linhas.length) {
+   case 1:
+    pontosBônus =1;
+    document.getElementById("pontos").play();
+    break;
     case 2:
       pontosBônus = 2; // Bônus de 2 pontos por remover 2 linhas
+      document.getElementById("pontos").play();
       break;
+     
     case 3:
       pontosBônus = 4; // Bônus de 4 pontos por remover 3 linhas
+      document.getElementById("pontos").play();
       break;
     case 4:
       pontosBônus = 8; // Bônus de 8 pontos por remover 4 linhas
@@ -183,7 +190,7 @@ function removerLinhas(linhas) {
     }
   }
 
-  document.getElementById("pontos").play();
+  
   atualizarPontuacao(pontos); //Atualiza na página os pontos do jogador.
 }
 
@@ -485,9 +492,9 @@ function desenhar() {
   document.addEventListener('keydown', function (e) {
     if (e.key == "ArrowLeft") {
       peca.paraEsquerda();
-      if (document.getElementById("audio").paused) {
+     if (document.getElementById("audio").paused) {
         document.getElementById("audio").play();
-        }
+        } 
     } else if (e.key == "ArrowRight") {
       peca.paraDireita();
       if (document.getElementById("audio").paused) {
@@ -541,7 +548,12 @@ function terminou() {
     ctx.fillText(texto, canvas.width / 2, canvas.height / 2 + 30);
     ctx.strokeText(texto, canvas.width / 2, canvas.height / 2 + 30);
     document.getElementById("gameover").play();
-    
+     // Pausa o áudio
+     let audio = document.getElementById("audio");
+     if (!audio.paused) {
+       audio.pause();
+       audio.currentTime = 0; // Reseta o áudio para o início
+     }
   }
   return fim;
 }
