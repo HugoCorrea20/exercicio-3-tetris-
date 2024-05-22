@@ -2,6 +2,9 @@
 //As cores das peças estão definidas na linha 183
 //Autor original: Rafael Sakurai
 //Adaptado por: Eduardo Gonelli
+//nome Hugo COrrea, Henry Gilad
+//features impletadas : som gameover henry , som do fixação, henry, som da musica em loop, Hugo, som dos pontos: hugo
+//decoraçaõ :hugo e henry, bonou de pontos : hugo e henty do som., peças: hugo
 
 let tela = []; // matriz com as cores de cada quadrado da tela.
 let pontos = 0; // pontuação do jogador.
