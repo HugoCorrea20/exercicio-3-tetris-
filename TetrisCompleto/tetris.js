@@ -94,6 +94,7 @@ function movimentarPeca() {
     rotLInvertido = 1;
     rotL = 1;
     rotT = 1;
+    Rotminibastão =1;
   }
 }
 
@@ -151,11 +152,18 @@ function removerLinhas(linhas) {
   let pontosBônus = 0;
 
   switch (linhas.length) {
+   case 1:
+    pontosBônus =1;
+    document.getElementById("pontos").play();
+    break;
     case 2:
       pontosBônus = 2; // Bônus de 2 pontos por remover 2 linhas
+      document.getElementById("pontos").play();
       break;
+     
     case 3:
       pontosBônus = 4; // Bônus de 4 pontos por remover 3 linhas
+      document.getElementById("pontos").play();
       break;
     case 4:
       pontosBônus = 8; // Bônus de 8 pontos por remover 4 linhas
@@ -181,7 +189,7 @@ function removerLinhas(linhas) {
     }
   }
 
-  document.getElementById("pontos").play();
+  
   atualizarPontuacao(pontos); //Atualiza na página os pontos do jogador.
 }
 
